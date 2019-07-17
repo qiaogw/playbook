@@ -10,11 +10,7 @@ RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
 RUN apt-get -y  update && \
     apt-get -y upgrade  && \
-    apt-get -y install tzdata && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-
-RUN apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml 
+    apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml 
 
 RUN echo "[global]" >> ~/.pip/pip.conf 
 RUN echo "index-url = http://mirrors.aliyun.com/pypi/simple/" >> ~/.pip/pip.conf 
