@@ -1,20 +1,23 @@
-FROM alpine
+FROM phusion/baseimage
 
 
-RUN    addgroup -S luhya && \
-    adduser -S -D -g "" -G luhya     luhya 
+
+RUN    useradd  luhya 
 
 RUN echo "luhya ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+RUN  apt-get clean
 
 ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get -y update && \
+    apt-get install -y tzdata  && \
+    dpkg-reconfigure --frontend noninteractive tzdata
 
-RUN  apk update && \
-    apk upgrade && \
-    apk  --no-cache add tzdata zeromq  python python-dev python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml   pip install pyinstaller pexpect pyzmq && \
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
-    echo '$TZ' > /etc/timezone && \
-    rm -rf /var/cache/apk/* 
+
+RUN apt-get install -y python-pip cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml && \
+    pip install pyinstaller pexpect pyzmq && \
+    apt-get clean 
 
 RUN mkdir /src && cd /src && \ 
     git clone https://github.com/cloudfirst/PromAnsible.git && \
