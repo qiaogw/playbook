@@ -1,7 +1,7 @@
 FROM frolvlad/alpine-glibc:alpine-3.5
 
 
-RUN  useradd -r -g luhya luhya
+RUN  adduser   luhya   -D   -u 1000 -s /bin/sh
 USER luhya
 RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.5/main" > /etc/apk/repositories
 RUN echo " https://mirrors.ustc.edu.cn/alpine/v3.5/community" >> /etc/apk/repositories 
