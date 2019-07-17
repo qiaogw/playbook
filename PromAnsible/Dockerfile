@@ -11,9 +11,7 @@ ENV TZ=Asia/Shanghai
 
 RUN  apk update && \
     apk upgrade && \
-    apk  --no-cache add tzdata zeromq && \
-    python  python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml  && \
-    pip install pyinstaller pexpect pyzmq && \
+    apk  --no-cache add tzdata zeromq  python python-dev python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml   pip install pyinstaller pexpect pyzmq && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo '$TZ' > /etc/timezone && \
     rm -rf /var/cache/apk/* 
