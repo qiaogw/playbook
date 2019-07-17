@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-glibc
+FROM alpine
 
 
 RUN    addgroup -S luhya && \
@@ -7,10 +7,15 @@ RUN    addgroup -S luhya && \
 RUN echo "luhya ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
+ENV TZ=Asia/Shanghai
+
 RUN  apk update && \
     apk upgrade && \
-    apk add python  python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml  && \
+    apk  --no-cache add tzdata zeromq && \
+    python  python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml  && \
     pip install pyinstaller pexpect pyzmq && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo '$TZ' > /etc/timezone && \
     rm -rf /var/cache/apk/* 
 
 RUN mkdir /src && cd /src && \ 
