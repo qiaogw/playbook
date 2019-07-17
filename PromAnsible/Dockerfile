@@ -15,9 +15,18 @@ RUN apt-get -y update && \
     dpkg-reconfigure --frontend noninteractive tzdata
 
 
-RUN apt-get install -y python-pip cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml && \
-    pip install pyinstaller pexpect pyzmq && \
+RUN apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml && \
     apt-get clean 
+
+RUN echo "[global]" >> ~/.pip/pip.conf 
+RUN echo "index-url = http://mirrors.aliyun.com/pypi/simple/" >> ~/.pip/pip.conf 
+RUN echo "[install]" >> ~/.pip/pip.conf 
+RUN echo "trusted-host = mirrors.aliyun.com" >> ~/.pip/pip.conf 
+
+
+
+RUN pip install --upgrade pip  && \
+    pip install   pyinstaller pexpect pyzmq 
 
 RUN mkdir /src && cd /src && \ 
     git clone https://github.com/cloudfirst/PromAnsible.git && \
