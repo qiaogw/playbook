@@ -6,17 +6,15 @@ RUN    useradd  luhya
 
 RUN echo "luhya ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers 
 RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
-RUN  apt-get clean
-
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get -y update && \
-    apt-get install -y tzdata  && \
-    dpkg-reconfigure --frontend noninteractive tzdata
 
 
-RUN apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml && \
-    apt-get clean 
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y tzdata && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+
+RUN apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml 
 
 RUN echo "[global]" >> ~/.pip/pip.conf 
 RUN echo "index-url = http://mirrors.aliyun.com/pypi/simple/" >> ~/.pip/pip.conf 
