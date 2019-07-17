@@ -1,12 +1,11 @@
-FROM frolvlad/alpine-glibc:alpine-3.5
+FROM frolvlad/alpine-glibc
 
 
 RUN    addgroup -S luhya && \
     adduser -S -D -g "" -G luhya     luhya 
 
 RUN echo "luhya ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers 
-RUN  echo "https://mirrors.ustc.edu.cn/alpine/v3.5/main" > /etc/apk/repositories
-RUN  echo " https://mirrors.ustc.edu.cn/alpine/v3.5/community" >> /etc/apk/repositories 
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 RUN  apk update && \
     apk upgrade && \
