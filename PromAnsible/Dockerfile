@@ -1,6 +1,6 @@
 FROM phusion/baseimage
 
-
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN    useradd  luhya 
 
@@ -8,9 +8,9 @@ RUN echo "luhya ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
 
-RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y tzdata && \
+RUN apt-get -y  update && \
+    apt-get -y upgrade  && \
+    apt-get -y install tzdata && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 
