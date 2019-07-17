@@ -3,10 +3,10 @@ FROM frolvlad/alpine-glibc:alpine-3.5
 
 RUN  adduser   luhya   -D   -u 1000 -s /bin/sh
 USER luhya
-RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.5/main" > /etc/apk/repositories
-RUN echo " https://mirrors.ustc.edu.cn/alpine/v3.5/community" >> /etc/apk/repositories 
+RUN sudo echo "https://mirrors.ustc.edu.cn/alpine/v3.5/main" > /etc/apk/repositories
+RUN sudo echo " https://mirrors.ustc.edu.cn/alpine/v3.5/community" >> /etc/apk/repositories 
 
-RUN apk update && \
+RUN sudo apk update && \
     apk upgrade && \
     apk add python  python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml  && \
     pip install pyinstaller pexpect pyzmq && \
