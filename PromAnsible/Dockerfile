@@ -18,8 +18,7 @@ RUN mkdir ~/.pip && \
     echo "[global] \ntrusted-host =  pypi.tuna.tsinghua.edu.cn \nindex-url = https://pypi.tuna.tsinghua.edu.cn/simple " >  pip.conf
 
 
-RUN 
-  pip install   pyinstaller pexpect pyzmq 
+RUN   pip install   pyinstaller pexpect pyzmq 
 
 RUN mkdir /src && cd /src && \ 
     git clone https://github.com/cloudfirst/PromAnsible.git && \
