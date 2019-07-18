@@ -19,7 +19,7 @@ RUN mkdir ~/.pip && \
 
 
 RUN   pip install   pyinstaller pexpect pyzmq 
-
+USER luhya
 RUN mkdir /src && cd /src && \ 
     git clone https://github.com/cloudfirst/PromAnsible.git && \
     git clone https://github.com/cloudfirst/promansible-Install.git && \
@@ -31,7 +31,6 @@ RUN mkdir /src && cd /src && \
     echo " monitor ansible_ssh_host=125.75.8.155" >> /etc/ansible/hosts && \
     cd .. && \
     cd promansible-Install && \
-    chown luhya:luhya -R /src && \ 
     ansible-playbook playbook/monitor.yml -i hosts -u luhya -kK --extra-vars "myhost=monitor" && \
     ansible-playbook playbook/monitor.yml -i hosts -u luhya -kK --extra-vars "myhost=monitor"
 
