@@ -15,7 +15,7 @@ RUN apt-get -y  update && \
 
 RUN mkdir ~/.pip && \
     cd ~/.pip/  && \
-    echo "[global] \ntrusted-host =  pypi.douban.com \nindex-url = http://pypi.douban.com/simple" >  pip.conf
+    echo "[global] \ntrusted-host =  pypi.tuna.tsinghua.edu.cn \nindex-url = https://pypi.tuna.tsinghua.edu.cn/simple " >  pip.conf
 
 
 RUN pip install --upgrade pip  && \
