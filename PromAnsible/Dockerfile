@@ -9,7 +9,9 @@ RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
 
 RUN apt-get -y  update && \
-    apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml 
+    apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir ~/.pip && \
     cd ~/.pip/  && \
