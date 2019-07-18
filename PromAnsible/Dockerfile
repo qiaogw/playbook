@@ -19,9 +19,11 @@ RUN mkdir ~/.pip && \
 
 
 RUN   pip install   pyinstaller pexpect pyzmq 
+
+RUN  mkdir /src && cd /src && \ 
+    chown luhya:luhya -R /src 
 USER luhya
-RUN mkdir /src && cd /src && \ 
-    git clone https://github.com/cloudfirst/PromAnsible.git && \
+RUN git clone https://github.com/cloudfirst/PromAnsible.git && \
     git clone https://github.com/cloudfirst/promansible-Install.git && \
     git clone https://github.com/cloudfirst/sample-ansible-script-for-promansible.git && \
     cd PromAnsible/ && \
