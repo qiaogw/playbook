@@ -11,11 +11,9 @@ RUN  sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 RUN apt-get -y  update && \
     apt-get install -y python-pip git cdbs quilt libzmq3-dev ansible sshfs sshpass python-yaml 
 
-RUN echo "[global]" >> ~/.pip/pip.conf 
-RUN echo "index-url = http://mirrors.aliyun.com/pypi/simple/" >> ~/.pip/pip.conf 
-RUN echo "[install]" >> ~/.pip/pip.conf 
-RUN echo "trusted-host = mirrors.aliyun.com" >> ~/.pip/pip.conf 
-
+RUN mkdir ~/.pip && \
+    cd ~/.pip/  && \
+    echo "[global] \ntrusted-host =  pypi.douban.com \nindex-url = http://pypi.douban.com/simple" >  pip.conf
 
 
 RUN pip install --upgrade pip  && \
