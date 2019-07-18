@@ -31,11 +31,7 @@ RUN cd /src && \
     dpkg-buildpackage && \
     make publish && \
     echo " [educloud]" >> /etc/ansible/hosts && \
-    echo " monitor ansible_ssh_host=125.75.8.155" >> /etc/ansible/hosts && \
-    cd .. && \
-    cd promansible-Install && \
-    ansible-playbook playbook/monitor.yml -i hosts -u luhya -kK --extra-vars "myhost=monitor" && \
-    ansible-playbook playbook/monitor.yml -i hosts -u luhya -kK --extra-vars "myhost=monitor"
-
+    echo " monitor ansible_ssh_host=125.75.8.155" >> /etc/ansible/hosts 
 
 EXPOSE 80 
+CMD [ " cd /src/promansible-Install &&   ansible-playbook playbook/monitor.yml -i hosts -u luhya -kK --extra-vars 'myhost=monitor' " ]
