@@ -1,0 +1,6 @@
+- name: install docker
+  hosts: jyjnw
+  remote_user: root
+
+  roles:
+    - docker
